@@ -4,6 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
+/**
+ * Se añade a la tabla usuarios el campo de IdCategoria 
+ * y se establece como FK con la tabla categorias
+ */
 return new class extends Migration
 {
     /**
@@ -22,7 +27,8 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * En caso de regresar al estado anterior, se borra la FK 
+     * y se elimina el campo
      */
     public function down(): void
     {

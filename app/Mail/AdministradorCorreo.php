@@ -20,6 +20,7 @@ class AdministradorCorreo extends Mailable
      */
     public function __construct($usuarios)
     {
+        //Recibe un arreglo con la información de la cantidad de usuarios por país 
         $this->usuarios = $usuarios;
     }
 
@@ -29,6 +30,7 @@ class AdministradorCorreo extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            //Asunto del correo
             subject: 'Reporte de usuarios',
         );
     }
@@ -39,6 +41,7 @@ class AdministradorCorreo extends Mailable
     public function content(): Content
     {
         return new Content(
+            //Se enlaza con la vista de correo adecuada
             view: 'emails.AdministradorEmail',
         );
     }

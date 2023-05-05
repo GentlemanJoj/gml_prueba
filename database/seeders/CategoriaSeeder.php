@@ -9,7 +9,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 class CategoriaSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Se ingresa a base de datos las categorias de usuarios.
      */
     public function run(): void
     {

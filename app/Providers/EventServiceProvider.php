@@ -27,6 +27,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        //El listener realiza 2 métodos, ambos cuando el evento UsuarioCreado es lanzado 
         Event::listen(UsuarioCreado::class, [UsuarioCreadoListener::class, 'enviarCorreoUsuario']);
         Event::listen(UsuarioCreado::class, [UsuarioCreadoListener::class, 'enviarCorreoAdministrador']);
     }

@@ -9,6 +9,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
+/**
+ * Listener que envía correo al usuario y al administrador 
+ * cuando el evento UsuarioCreado se lanza
+ */
 class UsuarioCreadoListener
 {
     /**
@@ -20,18 +24,22 @@ class UsuarioCreadoListener
     }
 
     /**
-     * Handle the event.
+     * Enviar correo al usuario
      */
     public function enviarCorreoUsuario(object $event): void
     {
-        //Enviar correo al usuario
+        //El event contiene la información del usuario
         Mail::to($event->usuario->email)->send(new UsuarioCorreo($event->usuario->nombre));
     }
 
+    /**
+     * Enviar correo al administrador 
+     */
     public function enviarCorreoAdministrador()
     {
-        //Enviar correo al administrador con el reporte 
+        //Obtener información de la cantidad de usuarios por país 
         $usuarios = UsuarioController::usuariosPorPais();
+        //Obtener el correo del administrador, que se encuentra en la configuración
         $administradorCorreo = env('ADMIN_EMAIL');
         Mail::to($administradorCorreo)->send(new AdministradorCorreo($usuarios));
     }

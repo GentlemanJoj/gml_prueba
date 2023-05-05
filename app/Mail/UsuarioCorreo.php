@@ -20,6 +20,7 @@ class UsuarioCorreo extends Mailable
      */
     public function __construct($nombre)
     {
+        //Recibe el nombre del usuario 
         $this->nombre = $nombre;
     }
 
@@ -29,6 +30,7 @@ class UsuarioCorreo extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            //Asunto del correo
             subject: 'GML-Prueba Registro',
         );
     }
@@ -39,6 +41,7 @@ class UsuarioCorreo extends Mailable
     public function content(): Content
     {
         return new Content(
+            //Se enlaza con la vista de correo adecuada
             view: 'emails.UsuarioEmail',
         );
     }

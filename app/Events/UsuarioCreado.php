@@ -11,6 +11,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
+//Evento que se emite al crear un usuario
 class UsuarioCreado
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;

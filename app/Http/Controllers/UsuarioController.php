@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
 use App\Models\Usuario;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
+use App\Events\UsuarioCreado;
 use PhpParser\Node\Expr\Empty_;
 
+use Illuminate\Support\Facades\DB;
 use function PHPUnit\Framework\assertIsNotObject;
 
 class UsuarioController extends Controller
@@ -54,6 +56,9 @@ class UsuarioController extends Controller
         $usuario = new Usuario();
         $usuario->Asignar($request);
         $usuario->save();
+
+        //Generación de evento
+        event(new UsuarioCreado($usuario));
 
         return view("usuarios.message", ['msg' => 'Registro guardado']);
     }
@@ -127,5 +132,15 @@ class UsuarioController extends Controller
 
         $usuario->delete();
         return redirect("usuarios");
+    }
+
+    public static function usuariosPorPais()
+    {
+        $usuarios = DB::select("SELECT pais,
+        COUNT(id) as 'total'
+        FROM usuarios
+        GROUP BY pais;");
+
+        return $usuarios;
     }
 }
